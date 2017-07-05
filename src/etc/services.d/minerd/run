@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv sh
+
+# Checks for USERNAME variable
+if [[ -z "$USERNAME" ]]; then
+    echo >&2 'Please set an USERNAME variable (ie.: -e USERNAME=xxx).'
+    exit 1
+fi
+
+# Checks for POOL variable
+if [[ -z "$POOL" ]]; then
+    echo >&2 'Please set a POOL variable (ie.: -e POOL=xxx).'
+    exit 1
+fi
+
+exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p x -t ${THREAD_NUM:-8}
