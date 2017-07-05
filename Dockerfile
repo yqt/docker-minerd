@@ -34,8 +34,8 @@ RUN set -ex \
 
 COPY src/ .
 
-# ssh
-RUN apk add --update --no-cache openssh
+# run dep
+RUN apk add --update --no-cache openssh libcurl
 
 RUN set -ex \
         && ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa \
