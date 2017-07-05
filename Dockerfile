@@ -42,6 +42,10 @@ RUN set -ex \
         && ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa \
         && mkdir -p /var/run/sshd
 
+RUN set -ex \
+        && sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
+        && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
 RUN echo 'root:root' | chpasswd
 
 EXPOSE 22
