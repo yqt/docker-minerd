@@ -50,8 +50,8 @@ RUN echo 'root:root' | chpasswd
 
 EXPOSE 22
 
-ENV USERNAME 'yqt-0314@126.com'
-ENV POOL 'xmr.pool.minergate.com:45560'
+ENV USERNAME username
+ENV POOL pool
 ENV THREAD_NUM 8
 
 WORKDIR /
