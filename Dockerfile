@@ -23,6 +23,7 @@ RUN set -ex \
                 curl-dev \
                 git \
                 build-base \
+        && mkdir /opt \
         && cd /opt \
         && git clone https://github.com/OhGodAPet/cpuminer-multi \
         && cd cpuminer-multi \
