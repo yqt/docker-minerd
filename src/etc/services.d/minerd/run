@@ -12,4 +12,4 @@ if [[ -z "$POOL" ]]; then
     exit 1
 fi
 
-exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p x -t ${THREAD_NUM:-8}
+exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD:-x} -t ${THREAD_NUM:-8}

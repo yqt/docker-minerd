@@ -51,6 +51,7 @@ RUN echo 'root:root' | chpasswd
 EXPOSE 22
 
 ENV USERNAME username
+ENV PASSWORD password
 ENV POOL pool
 ENV THREAD_NUM 8
 
