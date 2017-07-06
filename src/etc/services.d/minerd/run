@@ -12,4 +12,12 @@ if [[ -z "$POOL" ]]; then
     exit 1
 fi
 
-exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD:-x} -t ${THREAD_NUM:-8}
+# add hostname to PASSWORD if existed
+if [[ -z "$PASSWORD" ]]; then
+    PASSWORD="x"
+else
+    host=`hostname`
+    PASSWORD=${PASSWORD}${host}
+fi
+
+exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}
