@@ -17,7 +17,7 @@ if [[ -z "$PASSWORD" ]]; then
     PASSWORD="x"
 else
     host=`hostname`
-    PASSWORD=${PASSWORD}${host}
+    PASSWORD=${host}${PASSWORD}
 fi
 
 exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}
