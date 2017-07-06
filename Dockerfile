@@ -1,6 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="hackaday <hackaday@coz.moe>"
 
+
 ENV LANG C.UTF-8
 
 # build and install
@@ -29,6 +30,8 @@ ENV PASSWORD password
 ENV POOL pool
 ENV THREAD_NUM 8
 
+USER nobody
+
 WORKDIR /
 
-ENTRYPOINT ["/opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}"]
+ENTRYPOINT ["sh", "-c", "/opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}"]
