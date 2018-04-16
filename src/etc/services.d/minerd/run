@@ -15,9 +15,6 @@ fi
 # add hostname to PASSWORD if existed
 if [[ -z "$PASSWORD" ]]; then
     PASSWORD="x"
-else
-    host=`hostname`
-    PASSWORD=${host}${PASSWORD}
 fi
 
-exec /opt/cpuminer-multi/minerd -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}
+exec /opt/cpuminer-multi/cpuminer -a cryptonight -o stratum+tcp://${POOL} -u ${USERNAME} -p ${PASSWORD} -t ${THREAD_NUM:-8}

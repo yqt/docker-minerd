@@ -21,25 +21,29 @@ RUN set -ex \
                 autoconf \
                 openssl-dev \
                 curl-dev \
+                gmp-dev \
+                jansson-dev \
                 git \
                 build-base \
         && mkdir /opt \
         && cd /opt \
-        && git clone https://github.com/OhGodAPet/cpuminer-multi \
+        && git clone https://github.com/tpruvot/cpuminer-multi \
         && cd cpuminer-multi \
         && ./autogen.sh \
-        && CFLAGS="-O3" ./configure \
+        && ./configure CFLAGS="-march=native" --with-crypto --with-curl \
         && make \
         && apk del .build-deps
 
 COPY src/ .
 
 # run dep
-RUN apk add --update --no-cache openssh libcurl
+RUN apk add --update --no-cache openssh openssl libcurl jansson gmp
 
 RUN set -ex \
         && ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa \
         && ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa \
+        && ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa \
+        && ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519 \
         && mkdir -p /var/run/sshd
 
 RUN set -ex \
